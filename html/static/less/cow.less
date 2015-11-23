@@ -1,0 +1,219 @@
+@import "3L";
+@import "animation";
+
+.normalize();
+
+html, body {
+    height: 100%;
+    .gradient(#6FA6DC, #9DC6EE);
+}
+
+#background
+    {
+    width: 100%;
+    height: 374px;
+    background: url(../img/background.png) bottom center repeat-x;
+    background-size: 2595/2px 747/2px;
+    position: absolute;
+    bottom: 0px;
+    left: 0px;
+    }
+#title_field {
+    position: absolute;
+    width: 100%;
+    top: 0px;
+    height: 50%;
+    .border-box-sizing;
+    padding-top: 100px;
+    background: ;
+    .mask {
+        .gradient(rgba(110, 165, 221, 0) , rgba(134, 183, 230, 1));
+        position: absolute;
+        width: 100%;
+        top: 0px;
+        height: 100%;
+
+    }
+}
+
+h1 {
+    font-family: "DIN Condensed";
+    margin: 0;
+    font-size: 36pt;
+    color: white;
+    text-align: center;
+}
+
+.cow
+    {
+    .sprite (@w; @h; @x; @y; @path) {
+        position: absolute;
+        width: @w * .5px;
+        height: @h * .5px;
+        top: @y * .5px;
+        left: @x * .5px;
+        background: url(@path) center center no-repeat transparent;
+        background-size: @w*.5px @h*.5px;
+    }
+    .shadow_sprite(@folder, @w: 473, @h: 57, @x: 46, @y: 380, @part: "shadow")     { .sprite(@w, @h, @x, @y, ~`"../img/" + @{folder} + "/" + @{part} + ".png"`); }
+    .leg-left_sprite(@folder, @w: 50, @h: 98, @x: 160, @y: 302, @part: "leg")      { .sprite(@w, @h, @x, @y, ~`"../img/" + @{folder} + "/" + @{part} + ".png"`); }
+    .leg-right_sprite(@folder, @w: 50, @h: 98, @x: 378, @y: 302, @part: "leg")     { .sprite(@w, @h, @x, @y, ~`"../img/" + @{folder} + "/" + @{part} + ".png"`); }
+    .tail_sprite(@folder, @w: 66, @h: 107, @x: 453, @y: 149, @part: "tail")        { .sprite(@w, @h, @x, @y, ~`"../img/" + @{folder} + "/" + @{part} + ".png"`); .transform-origin(0% 0%); }
+    .udder_sprite(@folder, @w: 91, @h: 87, @x: 320, @y: 276, @part: "udder")       { .sprite(@w, @h, @x, @y, ~`"../img/" + @{folder} + "/" + @{part} + ".png"`); }
+    .body_sprite(@folder, @w: 382, @h: 328, @x: 103, @y: 71, @part: "body")        { .sprite(@w, @h, @x, @y, ~`"../img/" + @{folder} + "/" + @{part} + ".png"`); }
+    .head_sprite(@folder, @w: 149, @h: 226, @x: 43, @y: 0, @part: "head")          { .sprite(@w, @h, @x, @y, ~`"../img/" + @{folder} + "/" + @{part} + ".png"`); }
+    .ear-left_sprite(@folder, @w: 71, @h: 59, @x: 0, @y: 8, @part: "ear-left")     { .sprite(@w, @h, @x, @y, ~`"../img/" + @{folder} + "/" + @{part} + ".png"`); .transform-origin(100% 50%); }
+    .ear-right_sprite(@folder, @w: 66, @h: 59, @x: 151, @y: 2, @part: "ear-right") { .sprite(@w, @h, @x, @y, ~`"../img/" + @{folder} + "/" + @{part} + ".png"`); .transform-origin(0% 50%);  }
+
+
+
+
+    .eye (@x, @y, @color)
+        {
+        .iris {
+            .border-radius(4px);
+            background: @color;
+            width: 8px;
+            height: 8px;
+        }
+        overflow: hidden;
+        .border-box-sizing;
+        width: 8px;
+        height: 8px;
+        left: @x * .5px;
+        top: @y * .5px;
+        position: absolute;
+        }
+    position: absolute;
+    bottom: 200px;
+    width: 523px/2;
+    left: 50%;
+    margin-left: -523px/4;
+    height: 446px/2;
+    div { position: absolute; .transition(all 2s 1s ease);}
+    .eye-left  { .eye(70, 92, #133544); }
+    .eye-right { .eye(134, 92, #F1F4EF); }
+    .head-container { .sprite(149, 226, 0, 0, ""); }
+
+    .shadow { .shadow_sprite("plain"); }
+    .leg-left { .leg-left_sprite("plain"); }
+    .leg-right { .leg-right_sprite("plain"); }
+    .tail { .tail_sprite("plain"); }
+    .udder { .udder_sprite("plain"); }
+    .body { .body_sprite("plain"); }
+    .ear-left { .ear-left_sprite("plain"); }
+    .ear-right { .ear-right_sprite("plain"); }
+    .head { .head_sprite("plain"); }
+
+    // accessories
+    .shirt     { .sprite(500, 364, 90, 64, "../img/apparel/shirt.png"); }
+    .food      { .sprite(136, 55, -63, 181, "../img/accessories/food.png"); }
+
+    // Global states
+    &.dark
+        {
+        .leg-left { .leg-left_sprite("dark"); }
+        .leg-right { .leg-right_sprite("dark"); }
+        .tail { .tail_sprite("dark"); }
+        .udder { .udder_sprite("dark"); }
+        .body { .body_sprite("dark"); }
+        .head { .head_sprite("dark"); }
+        .eye-left  { .eye(70, 92, #F1F4EF); }
+        .eye-right { .eye(134, 92, #F1F4EF); }
+        }
+    &.funny
+        {
+        .leg-left { .leg-left_sprite("plain"); }
+        .leg-right { .leg-right_sprite("plain"); }
+        .tail { .tail_sprite("funny"); }
+        .udder { .udder_sprite("funny"); }
+        .body { .body_sprite("funny"); }
+        .head { .head_sprite("funny"); }
+        }
+    &.abstract
+        {
+        .leg-left { display: none; }
+        .leg-right { display: none; }
+        .tail { .tail_sprite("abstract"); }
+        .udder { .udder_sprite("abstract"); }
+        .body { .body_sprite("abstract"); }
+        .head { .head_sprite("abstract"); }
+        .ear-left { .ear-left_sprite("abstract", @w: 70, @h: 60,  @x: 0, @y: 8); }
+        .ear-right { .ear-right_sprite("abstract", @w: 60, @h: 60, @x: 171, @y: 8); }
+        .eye-left  { .eye(70, 92, #133544);  .iris { border-radius: 0px; width: 16px;}}
+        .eye-right { .eye(134, 92, #133544); .iris { border-radius: 0px; width: 16px;} }
+        }
+    &.brown
+        {
+        .leg-left { .leg-left_sprite("brown"); }
+        .leg-right { .leg-right_sprite("brown"); }
+        .tail { .tail_sprite("brown"); }
+        .udder { .udder_sprite("plain"); }
+        .body { .body_sprite("brown"); }
+        .head { .head_sprite("brown"); }
+        .ear-left { .ear-left_sprite("brown"); }
+        .ear-right { .ear-right_sprite("brown"); }
+        .eye-left  { .eye(70, 92, #584235); }
+        .eye-right { .eye(134, 92, #584235); }
+        }
+    &.gone
+        {
+        .leg-left { .leg-left_sprite("gone", 44, 83, 160, 315); }
+        .leg-right { .leg-right_sprite("gone", 37, 70, 375, 330, "leg-right"); }
+        .tail { .tail_sprite("gone", 36, 99, 474, 149); }
+        .udder { display: none; }
+        .body { .body_sprite("gone", 374, 328); }
+        .head { .head_sprite("gone", 204, 224, 0, 0); }
+        .ear-left { display: none; }
+        .ear-right { display: none; }
+        .eye-left  { display: none; }
+        .eye-right { display: none; }
+        }
+    }
+
+#actions {
+    position: absolute;
+    bottom: 0px;
+    left: 0px;
+    width: 100%;
+    height: auto;
+    .border-box-sizing;
+    padding: 0px 40px 20px 40px;
+    .action {
+        background-color: rgba(255,255,255,.9);
+        .box-shadow(0px 2px 5px rgba(0,0,0,.05));
+        font-family: "DIN Condensed";
+        margin: 15px auto 0px auto;
+        .border-box-sizing;
+        font-size: 24pt;
+        color: rgb(88, 109, 119);
+        text-align: center;
+        max-width: 480px;
+        padding: 20px 0px 10px 0px;
+        .border-radius(5px);
+        &:hover {
+            background-color: rgba(255,255,255,.6);
+            cursor: pointer;
+            color: rgb(21, 54, 68);
+        }
+        &:active {
+            .box-shadow(0px -0px 5px rgba(0,0,0,.05));
+            background-color: rgba(255,255,255,.3);
+            .translateY(2px);
+            cursor: pointer;
+            color: rgb(21, 54, 68);
+        }
+    }
+}
+
+@media screen and (min-width: 1000px) {
+    #actions {
+        padding: 0px 40px 40px 40px;
+        text-align: center;
+        .action {
+            display: inline-block;
+            padding: 20px 20px 10px 20px;
+            margin: 0px 10px;
+        }
+    }
+}
